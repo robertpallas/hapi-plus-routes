@@ -1,10 +1,8 @@
 module.exports = {
-    path: '/users/me',
+    path: '/users/promisemerejection',
     method: 'GET',
-    handler(request, reply) {
-        reply({
-          user: 'rick'
-        });
+    handler(request) {
+        return Promise.reject(new Error('My exception'));
     },
     config: {
         auth: 'jwt',

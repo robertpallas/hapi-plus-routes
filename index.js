@@ -69,7 +69,15 @@ exports.register = (server, options, next) => {
                     route.handler = (request, reply) => {
                         let retValue = orignalHandler.call(request, reply);
                         if(retValue instanceof Promise) {
-                          return retValue.then(reply);
+                          return retValue
+                          .then(reply)
+                          .catch(err => {
+                            // handle promise reject
+                            server.log(['startup', 'route-load', 'error'], err);
+                            let genericError = new Error('Internal error');
+                            genericError.statusCode = 500;
+                            return reply(genericError);
+                          });
                         }
                         else {
                           reply(retValue);
