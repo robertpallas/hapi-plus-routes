@@ -2,9 +2,9 @@ module.exports = {
     path: '/users/meobjectwrongusage',
     method: 'GET',
     handler(request, reply) {
-      return {
-        user: 'morty'
-      };
+        return {
+            user: 'morty'
+        };
     },
     config: {
         auth: 'jwt',

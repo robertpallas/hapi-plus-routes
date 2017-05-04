@@ -3,7 +3,7 @@ module.exports = {
     method: 'GET',
     handler(request) {
         return Promise.resolve({
-          user: 'rick'
+            user: 'rick'
         })
     },
     config: {

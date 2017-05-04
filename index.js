@@ -72,11 +72,11 @@ exports.register = (server, options, next) => {
                           return retValue
                           .then(reply)
                           .catch(err => {
-                            // handle promise reject
-                            server.log(['startup', 'route-load', 'error'], err);
-                            let genericError = new Error('Internal error');
-                            genericError.statusCode = 500;
-                            return reply(genericError);
+                              // handle promise rejection
+                              server.log(['startup', 'route-load', 'error'], err);
+                              let genericError = new Error('Internal error');
+                              genericError.statusCode = 500;
+                              return reply(genericError);
                           });
                         }
                         else {
