@@ -58,10 +58,6 @@ describe('different handler types', () => {
                         obj.data.message.should.be.equal('Internal error');
                         break;
                     }
-                    case '/users/meobjectwrongusage': {
-                        should(obj.data).be.undefined();
-                        break;
-                    }
                     default: {
                         obj.data.should.be.eql({user: 'rick'});
                     }
