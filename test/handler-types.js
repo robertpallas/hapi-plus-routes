@@ -54,8 +54,9 @@ describe('different handler types', () => {
                 switch(obj.path) {
                     case '/users/promisemerejection': {
                         should(obj.data instanceof Error).be.equal(true);
-                        obj.data.statusCode.should.be.equal(500);
-                        obj.data.message.should.be.equal('Internal error');
+                        console.log(obj.data);
+                        obj.data.output.payload.statusCode.should.be.equal(500);
+                        obj.data.output.payload.message.should.be.equal('An internal server error occurred');
                         break;
                     }
                     default: {

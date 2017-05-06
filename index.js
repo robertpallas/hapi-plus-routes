@@ -74,9 +74,7 @@ exports.register = (server, options, next) => {
                           .catch(err => {
                               // handle promise rejection
                               server.log([request.method, request.path, 'error'], err);
-                              let genericError = new Error('Internal error');
-                              genericError.statusCode = 500;
-                              return reply(genericError);
+                              return reply(Boom.internal());
                           });
                         }
                         else {
