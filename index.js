@@ -58,7 +58,6 @@ exports.register = (server, options, next) => {
                     }).unknown();
             }
 
-            server.route(route);
             if(route.handler) {
                 if(getParamNames(route.handler).length < 2) {
                     // default signature is (request, reply)
@@ -67,7 +66,7 @@ exports.register = (server, options, next) => {
                     // we wrap the handler function to support this
                     let orignalHandler = route.handler;
                     route.handler = (request, reply) => {
-                        let retValue = orignalHandler.call(request, reply);
+                        let retValue = orignalHandler.call(request);
                         if(retValue instanceof Promise) {
                           return retValue
                           .then(reply)
@@ -90,6 +89,7 @@ exports.register = (server, options, next) => {
                     }
                 }
             }
+            server.route(route);
             server.log(['startup', 'route-load'], chalk.green(route.method) + ' ' + route.path);
         } catch (err) {
             if (route) {
