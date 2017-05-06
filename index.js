@@ -73,7 +73,7 @@ exports.register = (server, options, next) => {
                           .then(reply)
                           .catch(err => {
                               // handle promise rejection
-                              server.log(['startup', 'route-load', 'error'], err);
+                              server.log([request.method, request.path, 'error'], err);
                               let genericError = new Error('Internal error');
                               genericError.statusCode = 500;
                               return reply(genericError);
