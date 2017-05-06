@@ -27,6 +27,7 @@ describe('different handler types', () => {
                     case '/users/promiseme': // returns a promise
                     case '/users/meobject':
                     case '/users/meobjectwrongusage':
+                    case '/users/promisemerejectionreturned':
                     case '/users/promisemerejection': { // returns just an object
                         let replyData = { path:route.path };
                         let handlerReturnValue = route.handler({}, (data) => {
@@ -41,7 +42,7 @@ describe('different handler types', () => {
                         }
                     }
                     default: {
-                        console.log('ignore', route.path);
+                        //console.log('ignore', route.path);
                         // ignore
                     }
                 }
@@ -49,14 +50,17 @@ describe('different handler types', () => {
         )
         .then(replyData => {
             console.log(replyData);
-            replyData.length.should.be.equal(4);
+            replyData.length.should.be.equal(5);
             replyData.map((obj) => {
                 switch(obj.path) {
                     case '/users/promisemerejection': {
                         should(obj.data instanceof Error).be.equal(true);
-                        console.log(obj.data);
                         obj.data.output.payload.statusCode.should.be.equal(500);
                         obj.data.output.payload.message.should.be.equal('An internal server error occurred');
+                        break;
+                    }
+                    case '/users/promisemerejectionreturned': {
+                        obj.data.output.payload.message.should.be.equal('A Boom Error');
                         break;
                     }
                     default: {

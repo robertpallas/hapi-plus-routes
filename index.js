@@ -73,8 +73,15 @@ exports.register = (server, options, next) => {
                           .then(reply)
                           .catch(err => {
                               // handle promise rejection
-                              server.log([request.method, request.path, 'error'], err);
-                              return reply(Boom.internal());
+                              if(err && err.isBoom) {
+                                  // boom errors are put through
+                                  return reply(err);
+                              }
+                              else {
+                                  // other errors are logged and a generic error is sent instead
+                                  server.log([request.method, request.path, 'error'], err);
+                                  return reply(Boom.internal());
+                              }
                           });
                         }
                         else {
