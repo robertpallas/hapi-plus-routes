@@ -3,7 +3,7 @@ module.exports = {
     method: 'GET',
     handler(request) {
         return {
-          user: 'rick'
+            user: 'rick'
         };
     },
     config: {

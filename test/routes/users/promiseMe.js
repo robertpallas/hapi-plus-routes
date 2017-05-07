@@ -4,7 +4,7 @@ module.exports = {
     handler(request) {
         return Promise.resolve({
             user: 'rick'
-        })
+        });
     },
     config: {
         auth: 'jwt',

@@ -3,7 +3,7 @@ module.exports = {
     method: 'GET',
     handler(request, reply) {
         reply({
-          user: 'rick'
+            user: 'rick'
         });
         return {
             user: 'morty'

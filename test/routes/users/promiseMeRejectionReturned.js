@@ -4,10 +4,10 @@ module.exports = {
     method: 'GET',
     handler(request) {
         return Promise.resolve()
-        .then(()=> {
+        .then(() => {
             throw new Error('My exception');
         })
-        .catch(err => {
+        .catch((err) => {
             throw Boom.badRequest('A Boom Error');
         });
     },
