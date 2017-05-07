@@ -28,5 +28,9 @@
     "glob": "^7.1.0",
     "joi": "^9.1.0",
     "lodash": "^4.16.2"
+  },
+  "devDependencies": {
+    "mocha": "^3.3.0",
+    "should": "^11.2.1"
   }
 }
