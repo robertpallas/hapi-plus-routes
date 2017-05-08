@@ -65,7 +65,7 @@ exports.register = (server, options, next) => {
                     // we wrap the handler function to support this
                     const orignalHandler = route.handler;
                     route.handler = (request, reply) => {
-                        const retValue = orignalHandler.call(request);
+                        const retValue = orignalHandler.call({}, request);
                         if(retValue instanceof Promise) {
                             return retValue
                           .then(reply)
