@@ -4,14 +4,8 @@ const Boom = require('boom');
 const Joi = require('joi');
 const chalk = require('chalk');
 
-const STRIP_COMMENTS = /((\/\/.*$)|(\/\*[\s\S]*?\*\/))/mg;
-const ARGUMENT_NAMES = /([^\s,]+)/g;
-
-function getParamNames(func) {
-    const fnStr = func.toString().replace(STRIP_COMMENTS, '');
-    let result = fnStr.slice(fnStr.indexOf('(') + 1, fnStr.indexOf(')')).match(ARGUMENT_NAMES);
-    if(result === null) { result = []; }
-    return result;
+function getParamCount(func) {
+    return func.length;
 }
 
 const defaultRoute = {
@@ -58,7 +52,7 @@ exports.register = (server, options, next) => {
             }
 
             if(route.handler) {
-                if(getParamNames(route.handler).length < 2) {
+                if(getParamCount(route.handler) < 2) {
                     // default signature is (request, reply)
                     // if reply is omitted, then the return value should be interpreted
                     // as the reply.

@@ -1,7 +1,7 @@
 module.exports = {
     path: '/users/promisemerejection',
     method: 'GET',
-    handler(request) {
+    handler: (request) => {
         return Promise.reject(new Error('My exception'));
     },
     config: {
