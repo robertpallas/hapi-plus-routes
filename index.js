@@ -38,16 +38,10 @@ exports.register = (server, options, next) => {
             route = require(`${globOptions.cwd}/${file}`);
             route = _.defaultsDeep(route, defaultRoute);
 
-            if(route.config.auth) {
-                if(!route.config) {
-                    route.config = {};
-                }
-                if(!route.config.validate) {
-                    route.config.validate = {};
-                }
-
+            if(route.config.auth && !(route.config.validate && route.config.validate.headers)) {
+                route.config.validate = route.config.validate || {};
                 route.config.validate.headers = Joi.object({
-                    Authorization: Joi.string().description('JWT token')
+                    Authorization: Joi.string().description('Auth token')
                 }).unknown();
             }
 
