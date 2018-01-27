@@ -18,7 +18,7 @@ class MockServer {
 describe('different handler types', () => {
     const mockServer = new MockServer();
     it('should handle all handler types', () => {
-        Routes.register(mockServer, { routes: './test/routes/**/*.js' }, () => {});
+        Routes.register(mockServer, { routes: './test/routes/users/*.js' }, () => {});
         return Promise.all(
             mockServer.routes.map((route) => {
                 // all handlers should be handled correctly
