@@ -1,6 +1,6 @@
 {
   "name": "hapi-plus-routes",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Auto-load and enhance hapi routes with defaults",
   "main": "index.js",
   "scripts": {
