@@ -8,6 +8,12 @@ function getParamCount(func) {
     return func.length;
 }
 
+function resolveRouteImport(path) {
+    /* eslint-disable import/no-dynamic-require, no-underscore-dangle */
+    const route = require(path);
+    return route.__esModule && Object.keys(route).indexOf('default') >= 0 ? route.default : route;
+}
+
 const defaultRoute = {
     method: 'GET',
     handler: (request, reply) => {
@@ -34,8 +40,7 @@ exports.register = (server, options, next) => {
         let route = null;
 
         try {
-            // eslint-disable-next-line
-            route = require(`${globOptions.cwd}/${file}`);
+            route = resolveRouteImport(`${globOptions.cwd}/${file}`);
             route = _.defaultsDeep(route, defaultRoute);
 
             if(route.config.auth && !(route.config.validate && route.config.validate.headers)) {
