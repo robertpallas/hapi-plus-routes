@@ -8,6 +8,6 @@ module.exports = class MockServer {
     }
 
     route(routeObj) {
-       this.routes[routeObj.path] = routeObj
+        this.routes[routeObj.path] = routeObj;
     }
 };

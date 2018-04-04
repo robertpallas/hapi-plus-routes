@@ -12,7 +12,7 @@ describe('routes defaults', () => {
         }
     };
 
-    Routes.register(mockServer, { 
+    Routes.register(mockServer, {
         routes: './test/routes/users/*.js',
         defaultRoute
     }, () => {});

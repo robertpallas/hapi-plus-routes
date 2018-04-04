@@ -1,4 +1,5 @@
 const Boom = require('boom');
+
 module.exports = {
     path: '/users/promisemerejectionreturned',
     method: 'GET',

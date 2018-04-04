@@ -8,7 +8,7 @@ describe('different handler types', () => {
         Routes.register(mockServer, { routes: './test/routes/users/*.js' }, () => {});
         return Promise.all(
             Object.keys(mockServer.routes).map((routeKey) => {
-                const route  = mockServer.routes[routeKey];
+                const route = mockServer.routes[routeKey];
                 // all handlers should be handled correctly
                 switch (route.path) {
                 case '/users/me': // the legacy way of using handlers
