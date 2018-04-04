@@ -78,8 +78,11 @@ exports.register = (server, options, next) => {
                     };
                 }
             }
-            server.route(route);
-            server.log(['startup', 'route-load'], `${chalk.green(route.method)} ${route.path}`);
+
+            if(route.handler && route.path && route.method) {
+                server.route(route);
+                server.log(['startup', 'route-load'], `${chalk.green(route.method)} ${route.path}`);
+            }
         } catch(err) {
             let logErr;
             if(route) {
