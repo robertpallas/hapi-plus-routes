@@ -1,17 +1,6 @@
 const Routes = require('../');
 const should = require('should');
-
-class MockServer {
-    constructor() {
-      this.routes = {};
-    }
-
-    log(tags, message) {}
-
-    route(routeObj) {
-      this.routes[routeObj.path] = routeObj
-    }
-}
+const MockServer = require('./mockServer.js');
 
 describe('headers validation', () => {
     const mockServer = new MockServer();

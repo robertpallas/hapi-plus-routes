@@ -41,7 +41,7 @@ exports.register = (server, options, next) => {
 
         try {
             route = resolveRouteImport(`${globOptions.cwd}/${file}`);
-            route = _.defaultsDeep(route, defaultRoute);
+            route = _.defaultsDeep(route, options.defaultRoute, defaultRoute);
 
             if(route.config.auth && !(route.config.validate && route.config.validate.headers)) {
                 route.config.validate = route.config.validate || {};

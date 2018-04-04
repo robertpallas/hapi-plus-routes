@@ -1,26 +1,14 @@
 const Routes = require('../');
 const should = require('should');
-
-class MockServer {
-    constructor() {
-        this.routes = [];
-    }
-
-    log(tags, message) {
-        // console.log(message);
-    }
-
-    route(routeObj) {
-        this.routes.push(routeObj);
-    }
-}
+const MockServer = require('./mockServer.js');
 
 describe('different handler types', () => {
     const mockServer = new MockServer();
     it('should handle all handler types', () => {
         Routes.register(mockServer, { routes: './test/routes/users/*.js' }, () => {});
         return Promise.all(
-            mockServer.routes.map((route) => {
+            Object.keys(mockServer.routes).map((routeKey) => {
+                const route  = mockServer.routes[routeKey];
                 // all handlers should be handled correctly
                 switch (route.path) {
                 case '/users/me': // the legacy way of using handlers
