@@ -1,11 +1,13 @@
 module.exports = class MockServer {
-  constructor() {
-    this.routes = {};
-  }
+    constructor() {
+        this.routes = {};
+    }
 
-  log(tags, message) {}
+    log(tags, message) {
+        // console.log(tags, message);
+    }
 
-  route(routeObj) {
-    this.routes[routeObj.path] = routeObj
-  }
+    route(routeObj) {
+       this.routes[routeObj.path] = routeObj
+    }
 };
