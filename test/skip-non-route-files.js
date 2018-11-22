@@ -1,5 +1,4 @@
 const Routes = require('../');
-const should = require('should');
 const MockServer = require('./mockServer.js');
 
 describe('do not load files that are not routes', () => {

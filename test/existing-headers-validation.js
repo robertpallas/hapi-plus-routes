@@ -1,5 +1,4 @@
 const Routes = require('../');
-const should = require('should');
 const MockServer = require('./mockServer.js');
 
 describe('headers validation', () => {
@@ -9,7 +8,7 @@ describe('headers validation', () => {
         Routes.register(mockServer, { routes: './test/routes/headers/headersValidationRoute.js' }, () => {});
 
         const registeredRoute = mockServer.routes['/headersvalidation'];
-        const routeConfig = registeredRoute.config;
+        const routeConfig = registeredRoute.options;
 
         routeConfig.should.be.an.instanceOf(Object).and.have.property('validate');
         routeConfig.validate.should.be.an.instanceOf(Object).and.have.property('headers');
