@@ -19,7 +19,7 @@ Where registering Hapi plugins add:
 
 ```js
 const Routes = require('hapi-plus-routes');
-const routeOptions = {{
+const routeOptions = {
   routes: './routes/**/*.js',
   defaultRoute: {
     path: '/users',
