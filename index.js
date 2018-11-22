@@ -16,7 +16,7 @@ const defaultRoute = {
   handler: (request, reply) => {
     reply(Boom.notImplemented());
   },
-  config: {
+  options: {
     auth: false,
     plugins: {
       policies: [],
@@ -42,9 +42,9 @@ module.exports = {
         route = resolveRouteImport(`${globOptions.cwd}/${file}`);
         route = _.defaultsDeep(route, options.defaultRoute, defaultRoute);
 
-        if (route.config.auth && !(route.config.validate && route.config.validate.headers)) {
-          route.config.validate = route.config.validate || {};
-          route.config.validate.headers = Joi.object({
+        if (route.options.auth && !(route.options.validate && route.options.validate.headers)) {
+          route.options.validate = route.options.validate || {};
+          route.options.validate.headers = Joi.object({
             Authorization: Joi.string().description('Auth token'),
           }).unknown();
         }
