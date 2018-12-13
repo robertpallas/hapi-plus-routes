@@ -50,6 +50,15 @@ module.exports = {
         }
 
         if (route.handler && route.path && route.method) {
+          const originalHandler = route.handler;
+          route.handler = async (request, h) => {
+            try {
+              return await originalHandler.call(null, request, h);
+            } catch (err) {
+              request.log([request.method, request.path, 'error'], err);
+              return Boom.badImplementation();
+            }
+          };
           server.route(route);
           server.log(['startup', 'route-load'], `${chalk.green(route.method)} ${route.path}`);
         }
