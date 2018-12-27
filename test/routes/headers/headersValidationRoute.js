@@ -4,7 +4,7 @@ module.exports = {
     path: '/headersvalidation',
     method: 'GET',
     handler: () => {},
-    config: {
+    options: {
         auth: 'custom-auth',
         validate: {
             headers: {

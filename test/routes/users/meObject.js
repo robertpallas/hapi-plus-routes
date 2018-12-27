@@ -6,7 +6,7 @@ module.exports = {
             user: 'rick'
         };
     },
-    config: {
+    options: {
         auth: 'jwt',
         description: 'Get current user details'
     }

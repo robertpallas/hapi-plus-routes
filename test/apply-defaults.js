@@ -5,7 +5,7 @@ const MockServer = require('./mockServer.js');
 describe('routes defaults', () => {
     const mockServer = new MockServer();
     const defaultRoute = {
-        config: {
+        options: {
             plugins: {
                 policies: ['policy1', 'policy2']
             }
@@ -18,13 +18,13 @@ describe('routes defaults', () => {
     }, () => {});
 
     const registeredRoute = mockServer.routes['/users/meobject'];
-    const routeConfig = registeredRoute.config;
+    const routeConfig = registeredRoute.options;
 
     it('should respect default route fields from options', () => {
         routeConfig.should.be.an.instanceOf(Object).and.have.property('plugins');
         routeConfig.plugins.should.be.an.instanceOf(Object).and.have.property('policies');
         routeConfig.plugins.policies.should.be.an.instanceOf(Array);
-        routeConfig.plugins.policies.length.should.equal(defaultRoute.config.plugins.policies.length);
+        routeConfig.plugins.policies.length.should.equal(defaultRoute.options.plugins.policies.length);
     });
 
     it('should respect default route fields from plugin', () => {

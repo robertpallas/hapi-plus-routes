@@ -9,7 +9,7 @@ describe('headers validation', () => {
         Routes.register(mockServer, { routes: './test/routes/headers/headersValidationRoute.js' }, () => {});
 
         const registeredRoute = mockServer.routes['/headersvalidation'];
-        const routeConfig = registeredRoute.config;
+        const routeConfig = registeredRoute.options;
 
         routeConfig.should.be.an.instanceOf(Object).and.have.property('validate');
         routeConfig.validate.should.be.an.instanceOf(Object).and.have.property('headers');
