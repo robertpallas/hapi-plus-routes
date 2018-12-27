@@ -25,6 +25,7 @@ const defaultRoute = {
   },
 };
 
+
 module.exports = {
   pkg,
   async register(server, options) {
@@ -54,9 +55,13 @@ module.exports = {
           route.handler = async (request, h) => {
             try {
               return await originalHandler.call(null, request, h);
-            } catch (err) {
-              request.log([request.method, request.path, 'error'], err);
-              return Boom.badImplementation();
+            } catch (error) {
+              if (options.errorHandler) {
+                await options.errorHandler(request, error);
+              } else {
+                server.log(['hapi-plus-routes', request.method, request.path], 'No error handler defined');
+                throw error;
+              }
             }
           };
           server.route(route);
