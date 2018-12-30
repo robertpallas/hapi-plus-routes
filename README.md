@@ -47,8 +47,9 @@ You may specify a custom error handler which will catch exceptions thrown in you
 const Routes = require('hapi-plus-routes');
 const routeOptions = {{
   routes: './routes/**/*.js',
-  errorHandler: (error) => {
+  errorHandler: (request, error) => {
     // Do something with the error
+    request.log(error);
   },
 };
 
