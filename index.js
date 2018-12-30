@@ -59,7 +59,6 @@ module.exports = {
               if (options.errorHandler) {
                 await options.errorHandler(request, error);
               } else {
-                server.log(['hapi-plus-routes', request.method, request.path], 'No error handler defined');
                 throw error;
               }
             }

@@ -12,8 +12,6 @@ describe('null error handler', () => {
     }, () => {});
 
     const route = mockServer.routes['/errors/thrown'];
-    console.log('route:');
-    console.log(route);
     it('should pass error upward', async () => {
         let caughtError = null;
         try {
