@@ -41,7 +41,7 @@ For complete example check [Hapi starter](https://github.com/Devtailor/hapi-star
 
 Error handling
 ----------------------
-You may specify a custom error handler which will catch exceptions thrown in your routes and do something with them.
+You may specify a custom error handler which will catch exceptions thrown in your routes and do something with them. A 500 internal server error will be returned.
 
 ```
 const Routes = require('hapi-plus-routes');
@@ -49,7 +49,7 @@ const routeOptions = {
   routes: './routes/**/*.js',
   errorHandler: (request, error) => {
     // Do something with the error
-    request.log(error);
+    request.log([request.method, request.path, 'error'], error);
   },
 };
 
