@@ -23,7 +23,7 @@ const routeOptions = {
   routes: './routes/**/*.js',
   defaultRoute: {
     path: '/users',
-    config: {
+    options: {
       plugins: {
         policies: ['preResponsePolicy'],
       },
@@ -38,3 +38,22 @@ server.register({
 ```
 
 For complete example check [Hapi starter](https://github.com/Devtailor/hapi-starter).
+
+Error handling
+----------------------
+You may specify a custom error handler which will catch exceptions thrown in your routes and do something with them.
+
+```
+const Routes = require('hapi-plus-routes');
+const routeOptions = {{
+  routes: './routes/**/*.js',
+  errorHandler: (error) => {
+    // Do something with the error
+  },
+};
+
+server.register({
+  plugin: Routes,
+  options: routeOptions,
+});
+```
