@@ -49,7 +49,7 @@ const routeOptions = {
   routes: './routes/**/*.js',
   errorHandler: (request, error) => {
     // Do something with the error
-    request.log(error);
+    request.log([request.method, request.path, 'error'], error);
   },
 };
 
