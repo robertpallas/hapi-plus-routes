@@ -25,6 +25,7 @@ const defaultRoute = {
   },
 };
 
+
 module.exports = {
   pkg,
   async register(server, options) {
@@ -50,6 +51,18 @@ module.exports = {
         }
 
         if (route.handler && route.path && route.method) {
+          const originalHandler = route.handler;
+          route.handler = async (request, h) => {
+            try {
+              return await originalHandler.call(null, request, h);
+            } catch (error) {
+              if (options.errorHandler) {
+                await options.errorHandler(request, error);
+              } else {
+                throw error;
+              }
+            }
+          };
           server.route(route);
           server.log(['startup', 'route-load'], `${chalk.green(route.method)} ${route.path}`);
         }
