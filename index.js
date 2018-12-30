@@ -52,6 +52,8 @@ module.exports = {
 
         if (route.handler && route.path && route.method) {
           const originalHandler = route.handler;
+
+          /* eslint consistent-return: 0 */
           route.handler = async (request, h) => {
             try {
               return await originalHandler.call(null, request, h);
