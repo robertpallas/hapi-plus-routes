@@ -43,6 +43,10 @@ module.exports = {
         route = resolveRouteImport(`${globOptions.cwd}/${file}`);
         route = _.defaultsDeep(route, options.defaultRoute, defaultRoute);
 
+        if (options.pathPrefix) {
+          route.path = options.pathPrefix + route.path;
+        }
+
         if (route.options.auth && !(route.options.validate && route.options.validate.headers)) {
           route.options.validate = route.options.validate || {};
           route.options.validate.headers = Joi.object({
