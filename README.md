@@ -61,11 +61,11 @@ server.register({
 
 Path prefix
 ----------------------
-You may specify a path prefix for all routes by supplying the `pathPrefix` option.
+You may specify a path prefix for all routes by supplying the `prefix` option.
 
 ```
 const routeOptions = {
   routes: './routes/**/*.js',
-  pathPrefix: '/some-prefix',
+  prefix: '/some-prefix',
 };
 ```

@@ -43,8 +43,11 @@ module.exports = {
         route = resolveRouteImport(`${globOptions.cwd}/${file}`);
         route = _.defaultsDeep(route, options.defaultRoute, defaultRoute);
 
-        if (options.pathPrefix) {
-          route.path = options.pathPrefix + route.path;
+        if (options.prefix) {
+          if (route.path.charAt(0) !== '/') {
+            route.path = `/${route.path}`;
+          }
+          route.path = options.prefix + route.path;
         }
 
         if (route.options.auth && !(route.options.validate && route.options.validate.headers)) {
