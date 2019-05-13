@@ -1,6 +1,6 @@
 {
   "name": "hapi-plus-routes",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Auto-load and enhance hapi routes with defaults",
   "main": "index.js",
   "scripts": {
@@ -29,7 +29,7 @@
     "chalk": "^2.3.2",
     "glob": "^7.1.2",
     "joi": "^13.1.2",
-    "lodash": "^4.17.5"
+    "lodash": "^4.17.11"
   },
   "devDependencies": {
     "eslint": "^4.19.1",
