@@ -4,11 +4,20 @@ const Boom = require('boom');
 const Joi = require('joi');
 const chalk = require('chalk');
 const pkg = require('./package.json');
+const path = require('path');
 
-function resolveRouteImport(path) {
+function resolveRouteImport(routePath) {
   /* eslint global-require: 0, import/no-dynamic-require: 0, no-underscore-dangle: 0  */
-  const route = require(path);
+  const route = require(routePath);
   return route.__esModule && Object.keys(route).indexOf('default') >= 0 ? route.default : route;
+}
+
+function validateOptions(options) {
+  if (options && options.prefix) {
+    if (options.prefix.charAt(0) !== '/' || options.prefix.substr(-1) === '/') {
+      throw new Error('The route prefix must start with a slash and must not end with a slash');
+    }
+  }
 }
 
 const defaultRoute = {
@@ -29,6 +38,8 @@ const defaultRoute = {
 module.exports = {
   pkg,
   async register(server, options) {
+    validateOptions(options);
+
     const globOptions = {
       nodir: true,
       strict: true,
@@ -42,6 +53,10 @@ module.exports = {
       try {
         route = resolveRouteImport(`${globOptions.cwd}/${file}`);
         route = _.defaultsDeep(route, options.defaultRoute, defaultRoute);
+
+        if (options.prefix) {
+          route.path = path.posix.join(options.prefix, route.path);
+        }
 
         if (route.options.auth && !(route.options.validate && route.options.validate.headers)) {
           route.options.validate = route.options.validate || {};
