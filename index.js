@@ -4,10 +4,11 @@ const Boom = require('boom');
 const Joi = require('joi');
 const chalk = require('chalk');
 const pkg = require('./package.json');
+const path = require('path');
 
-function resolveRouteImport(path) {
+function resolveRouteImport(routePath) {
   /* eslint global-require: 0, import/no-dynamic-require: 0, no-underscore-dangle: 0  */
-  const route = require(path);
+  const route = require(routePath);
   return route.__esModule && Object.keys(route).indexOf('default') >= 0 ? route.default : route;
 }
 
@@ -54,10 +55,7 @@ module.exports = {
         route = _.defaultsDeep(route, options.defaultRoute, defaultRoute);
 
         if (options.prefix) {
-          if (route.path.charAt(0) !== '/') {
-            route.path = `/${route.path}`;
-          }
-          route.path = options.prefix + route.path;
+          route.path = path.posix.join(options.prefix, route.path);
         }
 
         if (route.options.auth && !(route.options.validate && route.options.validate.headers)) {
