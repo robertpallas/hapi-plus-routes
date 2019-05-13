@@ -11,8 +11,8 @@ function resolveRouteImport(path) {
   return route.__esModule && Object.keys(route).indexOf('default') >= 0 ? route.default : route;
 }
 
-async function validateOptions(options) {
-  if (options.prefix) {
+function validateOptions(options) {
+  if (options && options.prefix) {
     if (options.prefix.charAt(0) !== '/' || options.prefix.substr(-1) === '/') {
       throw new Error('The route prefix must start with a slash and must not end with a slash');
     }
@@ -37,7 +37,7 @@ const defaultRoute = {
 module.exports = {
   pkg,
   async register(server, options) {
-    await validateOptions(options);
+    validateOptions(options);
 
     const globOptions = {
       nodir: true,
